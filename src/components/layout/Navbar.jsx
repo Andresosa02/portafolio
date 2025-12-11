@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import "../../styles/components/Navbar.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [language, setLanguage] = useState("ES");
+  const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,7 +18,14 @@ const Navbar = () => {
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      const offset = 10; // Ajuste para el navbar fijo
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
     }
   };
 
@@ -25,24 +33,34 @@ const Navbar = () => {
     <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
       <div className="container navbar-container">
         <div className="navbar-logo">
-          <span className="logo-icon">{"<AB/>"}</span>
+          <span className="logo-icon">{"<AJ>"}</span>
         </div>
 
         <ul className="navbar-menu">
           <li>
-            <a onClick={() => scrollToSection("inicio")}>Inicio</a>
+            <a onClick={() => scrollToSection("inicio")}>
+              {t("navbar.items.home")}
+            </a>
           </li>
           <li>
-            <a onClick={() => scrollToSection("sobre-mi")}>Sobre Mí</a>
+            <a onClick={() => scrollToSection("sobre-mi")}>
+              {t("navbar.items.about")}
+            </a>
           </li>
           <li>
-            <a onClick={() => scrollToSection("servicios")}>Servicios</a>
+            <a onClick={() => scrollToSection("servicios")}>
+              {t("navbar.items.services")}
+            </a>
           </li>
           <li>
-            <a onClick={() => scrollToSection("portafolio")}>Portafolio</a>
+            <a onClick={() => scrollToSection("portafolio")}>
+              {t("navbar.items.portfolio")}
+            </a>
           </li>
           <li>
-            <a onClick={() => scrollToSection("contacto")}>Contacto</a>
+            <a onClick={() => scrollToSection("contacto")}>
+              {t("navbar.items.contact")}
+            </a>
           </li>
         </ul>
 

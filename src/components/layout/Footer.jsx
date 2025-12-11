@@ -1,7 +1,9 @@
 import "../../styles/components/Footer.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { t } = useLanguage();
 
   return (
     <footer className="footer">
@@ -9,14 +11,11 @@ const Footer = () => {
         <div className="footer-content">
           <div className="footer-section">
             <h3 className="footer-logo">{"<AB/>"}</h3>
-            <p>
-              Desarrollador Full Stack especializado en crear soluciones
-              digitales innovadoras y de alto impacto.
-            </p>
+            <p>{t("footer.description")}</p>
           </div>
 
           <div className="footer-section">
-            <h4>Enlaces rápidos</h4>
+            <h4>{t("footer.quickLinks")}</h4>
             <ul className="footer-links">
               <li>
                 <a
@@ -26,7 +25,7 @@ const Footer = () => {
                       .scrollIntoView({ behavior: "smooth" })
                   }
                 >
-                  Inicio
+                  {t("navbar.items.home")}
                 </a>
               </li>
               <li>
@@ -37,7 +36,7 @@ const Footer = () => {
                       .scrollIntoView({ behavior: "smooth" })
                   }
                 >
-                  Sobre Mí
+                  {t("navbar.items.about")}
                 </a>
               </li>
               <li>
@@ -48,7 +47,7 @@ const Footer = () => {
                       .scrollIntoView({ behavior: "smooth" })
                   }
                 >
-                  Servicios
+                  {t("navbar.items.services")}
                 </a>
               </li>
               <li>
@@ -59,14 +58,14 @@ const Footer = () => {
                       .scrollIntoView({ behavior: "smooth" })
                   }
                 >
-                  Portafolio
+                  {t("navbar.items.portfolio")}
                 </a>
               </li>
             </ul>
           </div>
 
           <div className="footer-section">
-            <h4>Información de Contacto</h4>
+            <h4>{t("footer.contactInfo")}</h4>
             <ul className="footer-contact">
               <li>andres@ejemplo.com</li>
               <li>+58 415-2479209</li>
@@ -77,7 +76,7 @@ const Footer = () => {
 
         <div className="footer-bottom">
           <p>
-            &copy; {currentYear} Andrés Boada. Todos los derechos reservados.
+            &copy; {currentYear} Andrés Boada. {t("footer.rights")}
           </p>
           <div className="footer-social">
             <a

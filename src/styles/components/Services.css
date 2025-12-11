@@ -1,7 +1,3 @@
-.services {
-  background: var(--bg-primary);
-}
-
 .services-grid {
   margin-top: var(--spacing-2xl);
 }

@@ -1,27 +1,20 @@
 import "../../styles/components/Hero.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 const Hero = () => {
+  const { t } = useLanguage();
+
   return (
     <section id="inicio" className="hero">
-      <div className="hero-background">
-        <div className="gradient-orb orb-1"></div>
-        <div className="gradient-orb orb-2"></div>
-        <div className="gradient-orb orb-3"></div>
-      </div>
-
       <div className="container">
         <div className="hero-content">
           <div className="hero-text">
             <h1 className="hero-greeting">
-              Hola, soy <span className="gradient-text">Andrés Jiménez</span>
+              {t("hero.greeting")}{" "}
+              <span className="gradient-text">Andrés Felipe Jiménez Sosa</span>
             </h1>
-            <h2 className="hero-title">Desarrollador Web</h2>
-            <p className="hero-description">
-              Desarrollador web con experiencia en el desarrollo de paginas
-              modernas y escalables con tecnologías como React y Node.js,
-              utlizando el manejo de bases de datos con herramientas como
-              supabase y Postgres.
-            </p>
+            <h2 className="hero-title">{t("hero.title")}</h2>
+            <p className="hero-description">{t("hero.description")}</p>
 
             <div className="hero-buttons">
               <button
@@ -32,18 +25,16 @@ const Hero = () => {
                     .scrollIntoView({ behavior: "smooth" })
                 }
               >
-                Contáctame
+                {t("hero.contactBtn")}
               </button>
-              <button
+              <a
                 className="btn btn-outline"
-                onClick={() =>
-                  document
-                    .getElementById("portafolio")
-                    .scrollIntoView({ behavior: "smooth" })
-                }
+                href="/uploads/cv/Currículum.pdf" // Ruta a tu archivo PDF (relativa a la carpeta public)
+                target="_blank" // **IMPORTANTE**: Abre el enlace en una nueva pestaña
+                rel="noopener noreferrer" // Mejora la seguridad
               >
-                Ver Proyectos
-              </button>
+                {t("hero.cvBtn")}
+              </a>
             </div>
 
             <div className="hero-social">
@@ -82,7 +73,7 @@ const Hero = () => {
 
           <div className="hero-image">
             <div className="image-wrapper">
-              <img src="/perfil.jpg" alt="Andrés Boada" />
+              <img src="/perfil.jpg" alt="Andrés Jiménez" />
             </div>
           </div>
         </div>

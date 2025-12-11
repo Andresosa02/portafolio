@@ -1,71 +1,41 @@
 import { useState } from "react";
 import "../../styles/components/Portfolio.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 const Portfolio = () => {
-  const [activeFilter, setActiveFilter] = useState("Todos");
+  const { t } = useLanguage();
+  const [activeFilter, setActiveFilter] = useState("all");
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const projects = [
     {
-      title: "GL Satelital",
-      description:
-        "Modernización de sistema de monitoreo satelital con frontend en Angular y backend Laravel.",
-      image: "https://via.placeholder.com/400x300",
-      tags: ["Angular", "Laravel", "PostgreSQL"],
-      category: "Web",
-    },
-    {
-      title: "Sistema de Citas Médicas",
-      description:
-        "Sistema de gestión de pacientes y programación de citas médicas.",
-      image: "https://via.placeholder.com/400x300",
-      tags: ["Laravel", "Vue.js", "MySQL"],
-      category: "Web",
-    },
-    {
-      title: "Sistema SIAGEL",
-      description:
-        "Sistema integral para la gestión de talleres mecánicos y seguimiento de vehículos.",
-      image: "https://via.placeholder.com/400x300",
-      tags: ["Laravel", "React", "PostgreSQL"],
-      category: "Web",
-    },
-    {
-      title: "App Móvil Delivery",
-      description:
-        "Aplicación móvil para servicio de delivery con tracking en tiempo real.",
-      image: "https://via.placeholder.com/400x300",
-      tags: ["React Native", "Node.js", "MongoDB"],
-      category: "Móvil",
-    },
-    {
-      title: "E-commerce Platform",
-      description:
-        "Plataforma de comercio electrónico con pasarela de pagos integrada.",
-      image: "https://via.placeholder.com/400x300",
-      tags: ["Laravel", "Vue.js", "Stripe"],
-      category: "Web",
-    },
-    {
-      title: "Dashboard Analytics",
-      description:
-        "Dashboard interactivo para visualización de datos y métricas en tiempo real.",
-      image: "https://via.placeholder.com/400x300",
-      tags: ["React", "D3.js", "Node.js"],
+      title: t("portfolio.projects.0.title"),
+      description: t("portfolio.projects.0.description"),
+      image: "/public/boost4u.png",
+      tags: ["React", "Node.js", "Supabase"],
       category: "Web",
     },
   ];
 
-  const filters = ["Todos", "Web", "Móvil"];
+  const filters = ["all"];
 
   const filteredProjects =
-    activeFilter === "Todos"
+    activeFilter === "all"
       ? projects
       : projects.filter((project) => project.category === activeFilter);
+
+  const openModal = (image) => {
+    setSelectedImage(image);
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+  };
 
   return (
     <section id="portafolio" className="section portfolio">
       <div className="container">
-        <h2 className="section-title">Mi Portafolio</h2>
+        <h2 className="section-title">{t("portfolio.title")}</h2>
 
         <div className="portfolio-filters">
           {filters.map((filter) => (
@@ -76,7 +46,7 @@ const Portfolio = () => {
               }`}
               onClick={() => setActiveFilter(filter)}
             >
-              {filter}
+              {filter === "all" ? t("portfolio.filters.all") : filter}
             </button>
           ))}
         </div>
@@ -84,12 +54,30 @@ const Portfolio = () => {
         <div className="portfolio-grid grid grid-3">
           {filteredProjects.map((project, index) => (
             <div key={index} className="card portfolio-card">
-              <div className="project-image">
+              <div
+                className="project-image"
+                onClick={() => openModal(project.image)}
+                style={{ cursor: "pointer" }}
+              >
                 <img src={project.image} alt={project.title} />
                 <div className="project-overlay">
-                  <button className="btn btn-primary btn-sm">
-                    Ver Proyecto
-                  </button>
+                  <span style={{ color: "white", fontSize: "1.5rem" }}>
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <polyline points="9 21 3 21 3 15"></polyline>
+                      <line x1="21" y1="3" x2="14" y2="10"></line>
+                      <line x1="3" y1="21" x2="10" y2="14"></line>
+                    </svg>
+                  </span>
                 </div>
               </div>
               <div className="project-content">
@@ -107,6 +95,17 @@ const Portfolio = () => {
           ))}
         </div>
       </div>
+
+      {selectedImage && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="close-modal" onClick={closeModal}>
+              &times;
+            </button>
+            <img src={selectedImage} alt="Proyecto ampliado" />
+          </div>
+        </div>
+      )}
     </section>
   );
 };

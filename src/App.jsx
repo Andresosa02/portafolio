@@ -5,20 +5,34 @@ import Services from "./components/sections/Services";
 import Portfolio from "./components/sections/Portfolio";
 import Contact from "./components/sections/Contact";
 import Footer from "./components/layout/Footer";
-
+import "./styles/base/total.css";
 function App() {
   return (
-    <>
-      <Navbar />
-      <div id="inicio" className="contenedor-total">
-        <Hero />
-        <About />
-        <Services />
-        <Portfolio />
-        <Contact />
-      </div>
-      <Footer />
-    </>
+    <div>
+      <ul class="background">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <>
+        <Navbar />
+        <div id="inicio" className="contenedor-total">
+          <Hero />
+          <About />
+          <Services />
+          <Portfolio />
+          <Contact />
+        </div>
+        <Footer />
+      </>
+    </div>
   );
 }
 
