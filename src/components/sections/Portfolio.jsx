@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../../styles/components/Portfolio.css";
 import { useLanguage } from "../../context/LanguageContext";
+import boost4u from "../../assets/boost4u.png";
 
 const Portfolio = () => {
   const { t } = useLanguage();
@@ -11,7 +12,7 @@ const Portfolio = () => {
     {
       title: t("portfolio.projects.0.title"),
       description: t("portfolio.projects.0.description"),
-      image: "/public/boost4u.png",
+      image: boost4u,
       tags: ["React", "Node.js", "Supabase"],
       category: "Web",
     },

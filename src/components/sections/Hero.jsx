@@ -1,6 +1,7 @@
 import "../../styles/components/Hero.css";
 import { useLanguage } from "../../context/LanguageContext";
-
+import userImage from "../../assets/perfil.jpg";
+import cv from "../../assets/Currículum.pdf";
 const Hero = () => {
   const { t } = useLanguage();
 
@@ -29,9 +30,9 @@ const Hero = () => {
               </button>
               <a
                 className="btn btn-outline"
-                href="/uploads/cv/Currículum.pdf" // Ruta a tu archivo PDF (relativa a la carpeta public)
-                target="_blank" // **IMPORTANTE**: Abre el enlace en una nueva pestaña
-                rel="noopener noreferrer" // Mejora la seguridad
+                href={cv}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 {t("hero.cvBtn")}
               </a>
@@ -73,7 +74,7 @@ const Hero = () => {
 
           <div className="hero-image">
             <div className="image-wrapper">
-              <img src="/perfil.jpg" alt="Andrés Jiménez" />
+              <img src={userImage} alt="Andrés Jiménez" />
             </div>
           </div>
         </div>
